@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
      
      
   end
-  
+  #Port Settings
   config.vm.network "forwarded_port", guest: 32400, host: 32400
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
@@ -26,20 +26,12 @@ Vagrant.configure("2") do |config|
 
 
    #Provision Settings
+    config.vm.provision :shell, path: "Setupplex.sh"
    
-     config.vm.provision "shell", inline: <<-SHELL
-     apt-get update
-     apt-get upgrade -y
-     
-     wget https://downloads.plex.tv/plex-media-server-new/1.22.0.4163-d8c4875dd/debian/plexmediaserver_1.22.0.4163-d8c4875dd_amd64.deb
-     
-     sudo dpkg -i plexmediaserver_1.22.0.4163-d8c4875dd_amd64.deb
-     
-     sudo systemctl enable plexmediaserver.service
-     sudo systemctl start plexmediaserver.service
-     sudo systemctl status plexmediaserver.service
+
      
      
-     SHELL
+     
+     
     
   end
